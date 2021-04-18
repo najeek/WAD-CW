@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Desktop\\WAD-CW\\WAD-CW\\WAD-CW.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Documents\\GitHub\\WAD-CW\\WAD-CW\\WAD-CW\\WAD-CW.csproj",
       "projectName": "WAD-CW",
-      "projectPath": "C:\\Users\\user\\Desktop\\WAD-CW\\WAD-CW\\WAD-CW.csproj",
+      "projectPath": "C:\\Users\\user\\Documents\\GitHub\\WAD-CW\\WAD-CW\\WAD-CW\\WAD-CW.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Desktop\\WAD-CW\\WAD-CW\\obj\\",
+      "outputPath": "C:\\Users\\user\\Documents\\GitHub\\WAD-CW\\WAD-CW\\WAD-CW\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
