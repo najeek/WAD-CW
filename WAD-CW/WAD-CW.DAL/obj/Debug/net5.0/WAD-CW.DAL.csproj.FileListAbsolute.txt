@@ -1,0 +1,12 @@
+C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW.DAL\obj\Debug\net5.0\WAD-CW.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW.DAL\obj\Debug\net5.0\WAD-CW.DAL.AssemblyInfoInputs.cache
+C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW.DAL\obj\Debug\net5.0\WAD-CW.DAL.AssemblyInfo.cs
+C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW.DAL\obj\Debug\net5.0\WAD-CW.DAL.csproj.CoreCompileInputs.cache
+C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW.DAL\bin\Debug\net5.0\WAD-CW.DAL.deps.json
+C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW.DAL\bin\Debug\net5.0\WAD-CW.DAL.dll
+C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW.DAL\bin\Debug\net5.0\ref\WAD-CW.DAL.dll
+C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW.DAL\bin\Debug\net5.0\WAD-CW.DAL.pdb
+C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW.DAL\obj\Debug\net5.0\WAD-CW.DAL.dll
+C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW.DAL\obj\Debug\net5.0\ref\WAD-CW.DAL.dll
+C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW.DAL\obj\Debug\net5.0\WAD-CW.DAL.pdb
+C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW.DAL\obj\Debug\net5.0\WAD-CW.DAL.csprojAssemblyReference.cache

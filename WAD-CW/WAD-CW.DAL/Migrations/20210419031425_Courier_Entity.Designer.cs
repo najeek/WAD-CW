@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WAD_CW.DAL;
 
-namespace WAD_CW.Migrations
+namespace WAD_CW.DAL.DBO.Migrations
 {
     [DbContext(typeof(AddOrderDbContext))]
-    partial class AddOrderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210419031425_Courier_Entity")]
+    partial class Courier_Entity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,8 +28,8 @@ namespace WAD_CW.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("FullName")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNum")
                         .HasColumnType("nvarchar(max)");

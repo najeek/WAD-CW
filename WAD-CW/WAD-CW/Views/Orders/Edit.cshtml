@@ -1,4 +1,4 @@
-﻿@model WAD_CW.Models.Order
+﻿@model WAD_CW.DAL.DBO.Order
 
 @{
     ViewData["Title"] = "Edit";
@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Priority" class="control-label"></label>
-                <select asp-for="Priority" class="form-control" asp-items="Html.GetEnumSelectList<Priority>()"></select>
+                <select asp-for="Priority" class="form-control" asp-items="Html.GetEnumSelectList<WAD_CW.DAL.DBO.Priority>()"></select>
                 <span asp-validation-for="Priority" class="text-danger"></span>
             </div>
             <div class="form-group">

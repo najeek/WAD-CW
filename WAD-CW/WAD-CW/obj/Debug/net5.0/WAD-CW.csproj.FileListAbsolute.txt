@@ -154,3 +154,5 @@ C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW\obj\Debug\net5.0\Razor\Views
 C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW\obj\Debug\net5.0\Razor\Views\Couriers\Details.cshtml.g.cs
 C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW\obj\Debug\net5.0\Razor\Views\Couriers\Edit.cshtml.g.cs
 C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW\obj\Debug\net5.0\Razor\Views\Couriers\Index.cshtml.g.cs
+C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW\bin\Debug\net5.0\WAD-CW.DAL.dll
+C:\Users\user\Documents\GitHub\WAD-CW\WAD-CW\WAD-CW\bin\Debug\net5.0\WAD-CW.DAL.pdb

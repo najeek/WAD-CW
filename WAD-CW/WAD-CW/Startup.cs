@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WAD_CW.DAL;
+using WAD_CW.DAL.DBO;
+using WAD_CW.DAL.Repositories;
 
 namespace WAD_CW
 {
@@ -25,6 +27,7 @@ namespace WAD_CW
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllersWithViews();
 
             services.AddDbContext<AddOrderDbContext>(
@@ -32,7 +35,10 @@ namespace WAD_CW
                     Configuration.GetConnectionString("WAD-CW")
                     )
                 );
+            services.AddScoped<IRepository<Order>, OrderRepo>();
+            services.AddScoped<IRepository<Courier>, CourierRepo>();
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

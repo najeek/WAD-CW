@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WAD_CW.DAL;
 
-namespace WAD_CW.Migrations
+namespace WAD_CW.DAL.DBO.Migrations
 {
     [DbContext(typeof(AddOrderDbContext))]
-    [Migration("20210419022423_Order_Weight_Added")]
-    partial class Order_Weight_Added
+    [Migration("20210419034017_New-Migration")]
+    partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,24 @@ namespace WAD_CW.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("WAD_CW.Models.Courier", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNum")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Couriers");
+                });
 
             modelBuilder.Entity("WAD_CW.Models.Order", b =>
                 {
@@ -40,6 +58,9 @@ namespace WAD_CW.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CourierId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("OrderGetTime")
                         .HasColumnType("datetime2");
 
@@ -47,12 +68,27 @@ namespace WAD_CW.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Weight")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourierId");
+
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("WAD_CW.Models.Order", b =>
+                {
+                    b.HasOne("WAD_CW.Models.Courier", "Courier")
+                        .WithMany("Orders")
+                        .HasForeignKey("CourierId");
+
+                    b.Navigation("Courier");
+                });
+
+            modelBuilder.Entity("WAD_CW.Models.Courier", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

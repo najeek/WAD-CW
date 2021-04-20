@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WAD_CW.DAL;
 
-namespace WAD_CW.Migrations
+namespace WAD_CW.DAL.DBO.Migrations
 {
     [DbContext(typeof(AddOrderDbContext))]
-    [Migration("20210419031425_Courier_Entity")]
-    partial class Courier_Entity
+    partial class AddOrderDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,8 +26,8 @@ namespace WAD_CW.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FullName")
-                        .HasColumnType("int");
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNum")
                         .HasColumnType("nvarchar(max)");
@@ -39,7 +37,7 @@ namespace WAD_CW.Migrations
                     b.ToTable("Couriers");
                 });
 
-            modelBuilder.Entity("WAD_CW.Models.Order", b =>
+            modelBuilder.Entity("WAD_CW.DAL.DBO.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,7 +75,7 @@ namespace WAD_CW.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("WAD_CW.Models.Order", b =>
+            modelBuilder.Entity("WAD_CW.DAL.DBO.Order", b =>
                 {
                     b.HasOne("WAD_CW.Models.Courier", "Courier")
                         .WithMany("Orders")
@@ -86,7 +84,7 @@ namespace WAD_CW.Migrations
                     b.Navigation("Courier");
                 });
 
-            modelBuilder.Entity("WAD_CW.Models.Courier", b =>
+            modelBuilder.Entity("WAD_CW.DAL.DBO.Courier", b =>
                 {
                     b.Navigation("Orders");
                 });

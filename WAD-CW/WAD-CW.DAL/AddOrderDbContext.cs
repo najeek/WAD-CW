@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WAD_CW.Models;
+using WAD_CW.DAL.DBO;
 
 namespace WAD_CW.DAL
 {

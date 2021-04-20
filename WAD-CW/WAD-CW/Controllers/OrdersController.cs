@@ -6,24 +6,28 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WAD_CW.DAL;
+using WAD_CW.DAL.Repositories;
 using WAD_CW.Models;
 
-namespace WAD_CW.Controllers
+namespace WAD_CW.DAL.DBO.Controllers
 {
     public class OrdersController : Controller
     {
-        private readonly AddOrderDbContext _context;
+        private readonly IRepository<Order> _orderRepo;
+        private readonly IRepository<Courier> _courierRepo;
 
-        public OrdersController(AddOrderDbContext context)
+        public OrdersController(IRepository<Order> orderRepo, 
+                                IRepository<Courier> courierRepo)
         {
-            _context = context;
+            _orderRepo = orderRepo;
+            _courierRepo = courierRepo;
         }
 
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var addOrderDbContext = _context.Orders.Include(o => o.Courier);
-            return View(await addOrderDbContext.ToListAsync());
+        
+            return View(await _orderRepo.GetAllAsync());
         }
 
         // GET: Orders/Details/5
@@ -34,9 +38,7 @@ namespace WAD_CW.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Orders
-                .Include(o => o.Courier)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var order = await _orderRepo.GetByIdAsync(id.Value);
             if (order == null)
             {
                 return NotFound();
@@ -46,9 +48,9 @@ namespace WAD_CW.Controllers
         }
 
         // GET: Orders/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["CourierId"] = new SelectList(_context.Couriers, "Id", "FullName");
+            ViewData["CourierId"] = new SelectList(await _courierRepo.GetAllAsync(), "Id", "FullName");
             return View();
         }
 
@@ -61,11 +63,10 @@ namespace WAD_CW.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(order);
-                await _context.SaveChangesAsync();
+                await _orderRepo.CreateAsync(order);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourierId"] = new SelectList(_context.Couriers, "Id", "FullName", order.CourierId);
+            ViewData["CourierId"] = new SelectList(await _courierRepo.GetAllAsync(), "Id", "FullName", order.CourierId);
             return View(order);
         }
 
@@ -77,12 +78,12 @@ namespace WAD_CW.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Orders.FindAsync(id);
+            var order = await _orderRepo.GetByIdAsync(id.Value);
             if (order == null)
             {
                 return NotFound();
             }
-            ViewData["CourierId"] = new SelectList(_context.Couriers, "Id", "FullName", order.CourierId);
+            ViewData["CourierId"] = new SelectList(await _courierRepo.GetAllAsync(), "Id", "FullName", order.CourierId);
             return View(order);
         }
 
@@ -102,12 +103,11 @@ namespace WAD_CW.Controllers
             {
                 try
                 {
-                    _context.Update(order);
-                    await _context.SaveChangesAsync();
+                    await _orderRepo.UpdateAsync(order);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrderExists(order.Id))
+                    if (!_orderRepo.Exists(order.Id))
                     {
                         return NotFound();
                     }
@@ -118,7 +118,7 @@ namespace WAD_CW.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourierId"] = new SelectList(_context.Couriers, "Id", "FullName", order.CourierId);
+            ViewData["CourierId"] = new SelectList(await _courierRepo.GetAllAsync(), "Id", "FullName", order.CourierId);
             return View(order);
         }
 
@@ -130,9 +130,7 @@ namespace WAD_CW.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Orders
-                .Include(o => o.Courier)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var order = await _orderRepo.GetByIdAsync(id.Value);
             if (order == null)
             {
                 return NotFound();
@@ -146,15 +144,9 @@ namespace WAD_CW.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var order = await _context.Orders.FindAsync(id);
-            _context.Orders.Remove(order);
-            await _context.SaveChangesAsync();
+            await _orderRepo.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OrderExists(int id)
-        {
-            return _context.Orders.Any(e => e.Id == id);
-        }
     }
 }

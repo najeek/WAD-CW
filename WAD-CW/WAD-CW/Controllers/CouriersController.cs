@@ -6,23 +6,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WAD_CW.DAL;
+using WAD_CW.DAL.Repositories;
 using WAD_CW.Models;
 
-namespace WAD_CW.Controllers
+namespace WAD_CW.DAL.DBO.Controllers
 {
     public class CouriersController : Controller
     {
-        private readonly AddOrderDbContext _context;
+        private readonly IRepository<Courier> _courierRepo;
 
-        public CouriersController(AddOrderDbContext context)
+        public CouriersController(IRepository<Courier> courierRepo)
         {
-            _context = context;
+            _courierRepo = courierRepo;
         }
 
         // GET: Couriers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Couriers.ToListAsync());
+            return View(await _courierRepo.GetAllAsync());
         }
 
         // GET: Couriers/Details/5
@@ -33,8 +34,7 @@ namespace WAD_CW.Controllers
                 return NotFound();
             }
 
-            var courier = await _context.Couriers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var courier = await _courierRepo.GetByIdAsync(id.Value);
             if (courier == null)
             {
                 return NotFound();
@@ -58,8 +58,8 @@ namespace WAD_CW.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(courier);
-                await _context.SaveChangesAsync();
+                await _courierRepo.CreateAsync(courier);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(courier);
@@ -73,7 +73,7 @@ namespace WAD_CW.Controllers
                 return NotFound();
             }
 
-            var courier = await _context.Couriers.FindAsync(id);
+            var courier = await _courierRepo.GetByIdAsync(id.Value);
             if (courier == null)
             {
                 return NotFound();
@@ -97,12 +97,12 @@ namespace WAD_CW.Controllers
             {
                 try
                 {
-                    _context.Update(courier);
-                    await _context.SaveChangesAsync();
+                    
+                    await _courierRepo.UpdateAsync(courier);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CourierExists(courier.Id))
+                    if (!_courierRepo.Exists(courier.Id))
                     {
                         return NotFound();
                     }
@@ -124,8 +124,7 @@ namespace WAD_CW.Controllers
                 return NotFound();
             }
 
-            var courier = await _context.Couriers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var courier = await _courierRepo.GetByIdAsync(id.Value);
             if (courier == null)
             {
                 return NotFound();
@@ -139,15 +138,10 @@ namespace WAD_CW.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var courier = await _context.Couriers.FindAsync(id);
-            _context.Couriers.Remove(courier);
-            await _context.SaveChangesAsync();
+            await _courierRepo.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CourierExists(int id)
-        {
-            return _context.Couriers.Any(e => e.Id == id);
-        }
+       
     }
 }

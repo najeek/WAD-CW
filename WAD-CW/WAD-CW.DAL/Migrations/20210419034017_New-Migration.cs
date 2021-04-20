@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace WAD_CW.Migrations
+namespace WAD_CW.DAL.DBO.Migrations
 {
     public partial class NewMigration : Migration
     {
